@@ -124,7 +124,7 @@ class MainPage extends StatelessWidget {
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
                 // 设置宽高比，使卡片高度为50px（宽度/高度的比例）
-                childAspectRatio: 3.0,
+                childAspectRatio: 4.0,
                 // 设置为true，让GridView只占用内容所需高度
                 shrinkWrap: true,
                 // 禁止内部滚动，使用外部滚动
@@ -170,21 +170,6 @@ class MainPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const BasicLayoutExample()),
-                      );
-                    },
-                  ),
-                  // 基础布局控件示例
-                  _buildDemoCard(
-                    context,
-                    title: '布局控件',
-                    description: 'Align、Center、Padding等基础布局控件',
-                    icon: Icons.grid_3x3,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const BasicLayoutWidgetsExample()),
                       );
                     },
                   ),
