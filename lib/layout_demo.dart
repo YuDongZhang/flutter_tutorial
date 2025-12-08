@@ -210,21 +210,642 @@ class LayoutDemo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Wrap(
-            spacing: 8.0,
-            runSpacing: 8.0,
+          // Align 示例
+          _buildSubSectionTitle('Align', '对齐组件'),
+          _buildAlignDemo(),
+          const SizedBox(height: 15),
+
+          // Center 示例
+          _buildSubSectionTitle('Center', '居中组件'),
+          _buildCenterDemo(),
+          const SizedBox(height: 15),
+
+          // Padding 示例
+          _buildSubSectionTitle('Padding', '内边距组件'),
+          _buildPaddingDemo(),
+          const SizedBox(height: 15),
+
+          // SizedBox 示例
+          _buildSubSectionTitle('SizedBox', '固定尺寸组件'),
+          _buildSizedBoxDemo(),
+          const SizedBox(height: 15),
+
+          // Expanded 示例
+          _buildSubSectionTitle('Expanded', '扩展组件'),
+          _buildExpandedDemo(),
+          const SizedBox(height: 15),
+
+          // ConstrainedBox 示例
+          _buildSubSectionTitle('ConstrainedBox', '约束盒子'),
+          _buildConstrainedBoxDemo(),
+          const SizedBox(height: 15),
+
+          // FractionallySizedBox 示例
+          _buildSubSectionTitle('FractionallySizedBox', '比例尺寸盒子'),
+          _buildFractionallySizedBoxDemo(),
+          const SizedBox(height: 15),
+
+          // AspectRatio 示例
+          _buildSubSectionTitle('AspectRatio', '宽高比组件'),
+          _buildAspectRatioDemo(),
+          const SizedBox(height: 15),
+
+          // Baseline 示例
+          _buildSubSectionTitle('Baseline', '基线对齐组件'),
+          _buildBaselineDemo(),
+          const SizedBox(height: 15),
+
+          // Wrap 示例
+          _buildSubSectionTitle('Wrap', '流式布局组件'),
+          _buildWrapDemo(),
+          const SizedBox(height: 15),
+
+          // Spacer 示例
+          _buildSubSectionTitle('Spacer', '间距填充组件'),
+          _buildSpacerDemo(),
+          const SizedBox(height: 15),
+
+          // Offstage 示例
+          _buildSubSectionTitle('Offstage', '隐藏但保持状态组件'),
+          _buildOffstageDemo(),
+          const SizedBox(height: 15),
+
+          // LimitedBox 示例
+          _buildSubSectionTitle('LimitedBox', '限制尺寸组件'),
+          _buildLimitedBoxDemo(),
+          const SizedBox(height: 15),
+
+          // IntrinsicWidth/Height 示例
+          _buildSubSectionTitle('IntrinsicWidth/Height', '内在尺寸组件'),
+          _buildIntrinsicSizeDemo(),
+        ],
+      ),
+    );
+  }
+
+  // Align 演示
+  Widget _buildAlignDemo() {
+    return Container(
+      width: double.infinity,
+      height: 100,
+      decoration: BoxDecoration(
+        color: Colors.red[100],
+        border: Border.all(color: Colors.red, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              width: 40, height: 40,
+              color: Colors.red[300],
+              child: const Center(child: Text('TL', style: TextStyle(fontSize: 12))),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              width: 40, height: 40,
+              color: Colors.red[400],
+              child: const Center(child: Text('TR', style: TextStyle(fontSize: 12))),
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              width: 40, height: 40,
+              color: Colors.red[500],
+              child: const Center(child: Text('C', style: TextStyle(fontSize: 12, color: Colors.white))),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              width: 40, height: 40,
+              color: Colors.red[600],
+              child: const Center(child: Text('BL', style: TextStyle(fontSize: 12, color: Colors.white))),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              width: 40, height: 40,
+              color: Colors.red[700],
+              child: const Center(child: Text('BR', style: TextStyle(fontSize: 12, color: Colors.white))),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Center 演示
+  Widget _buildCenterDemo() {
+    return Container(
+      width: double.infinity,
+      height: 80,
+      decoration: BoxDecoration(
+        color: Colors.pink[100],
+        border: Border.all(color: Colors.pink, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.pink[400],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: const Text('我被居中了！', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        ),
+      ),
+    );
+  }
+
+  // Padding 演示
+  Widget _buildPaddingDemo() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.amber[100],
+        border: Border.all(color: Colors.amber, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Column(
             children: [
-              _buildLayoutWidgetChip('Align'),
-              _buildLayoutWidgetChip('Center'),
-              _buildLayoutWidgetChip('Padding'),
-              _buildLayoutWidgetChip('SizedBox'),
-              _buildLayoutWidgetChip('Expanded'),
-              _buildLayoutWidgetChip('ConstrainedBox'),
-              _buildLayoutWidgetChip('FractionallySizedBox'),
-              _buildLayoutWidgetChip('AspectRatio'),
-              _buildLayoutWidgetChip('Baseline'),
-              _buildLayoutWidgetChip('CustomSingleChildLayout'),
+              const Text('无Padding', style: TextStyle(fontSize: 12)),
+              Container(
+                color: Colors.amber[300],
+                child: const Text('内容'),
+              ),
             ],
+          ),
+          Column(
+            children: [
+              const Text('Padding: 8', style: TextStyle(fontSize: 12)),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  color: Colors.amber[500],
+                  child: const Text('内容'),
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              const Text('Padding: 16', style: TextStyle(fontSize: 12)),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  color: Colors.amber[700],
+                  child: const Text('内容', style: TextStyle(color: Colors.white)),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // SizedBox 演示
+  Widget _buildSizedBoxDemo() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          children: [
+            const Text('50x50', style: TextStyle(fontSize: 12)),
+            SizedBox(
+              width: 50,
+              height: 50,
+              child: Container(
+                color: Colors.cyan[300],
+                alignment: Alignment.center,
+                child: const Text('50'),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            const Text('80x60', style: TextStyle(fontSize: 12)),
+            SizedBox(
+              width: 80,
+              height: 60,
+              child: Container(
+                color: Colors.cyan[500],
+                alignment: Alignment.center,
+                child: const Text('80x60'),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            const Text('100x40', style: TextStyle(fontSize: 12)),
+            SizedBox(
+              width: 100,
+              height: 40,
+              child: Container(
+                color: Colors.cyan[700],
+                alignment: Alignment.center,
+                child: const Text('100x40', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  // Expanded 演示
+  Widget _buildExpandedDemo() {
+    return Container(
+      width: double.infinity,
+      height: 60,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.indigo, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.indigo[200],
+              alignment: Alignment.center,
+              child: const Text('flex:1'),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(
+              color: Colors.indigo[400],
+              alignment: Alignment.center,
+              child: const Text('flex:2', style: TextStyle(color: Colors.white)),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.indigo[600],
+              alignment: Alignment.center,
+              child: const Text('flex:1', style: TextStyle(color: Colors.white)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ConstrainedBox 演示
+  Widget _buildConstrainedBoxDemo() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          children: [
+            const Text('minWidth: 100', style: TextStyle(fontSize: 11)),
+            ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 100, minHeight: 40),
+              child: Container(
+                color: Colors.teal[300],
+                alignment: Alignment.center,
+                child: const Text('Min'),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            const Text('maxWidth: 80', style: TextStyle(fontSize: 11)),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 80, maxHeight: 60),
+              child: Container(
+                color: Colors.teal[500],
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(8),
+                child: const Text('Max约束', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  // FractionallySizedBox 演示
+  Widget _buildFractionallySizedBoxDemo() {
+    return Container(
+      width: double.infinity,
+      height: 80,
+      decoration: BoxDecoration(
+        color: Colors.lime[100],
+        border: Border.all(color: Colors.lime, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          FractionallySizedBox(
+            widthFactor: 0.8,
+            child: Container(
+              height: 25,
+              color: Colors.lime[400],
+              alignment: Alignment.center,
+              child: const Text('80% 宽度', style: TextStyle(fontSize: 12)),
+            ),
+          ),
+          FractionallySizedBox(
+            widthFactor: 0.5,
+            child: Container(
+              height: 25,
+              color: Colors.lime[600],
+              alignment: Alignment.center,
+              child: const Text('50% 宽度', style: TextStyle(fontSize: 12, color: Colors.white)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // AspectRatio 演示
+  Widget _buildAspectRatioDemo() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          children: [
+            const Text('1:1', style: TextStyle(fontSize: 12)),
+            SizedBox(
+              width: 60,
+              child: AspectRatio(
+                aspectRatio: 1.0,
+                child: Container(
+                  color: Colors.deepOrange[300],
+                  alignment: Alignment.center,
+                  child: const Text('正方形'),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            const Text('16:9', style: TextStyle(fontSize: 12)),
+            SizedBox(
+              width: 100,
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Container(
+                  color: Colors.deepOrange[500],
+                  alignment: Alignment.center,
+                  child: const Text('16:9', style: TextStyle(color: Colors.white)),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            const Text('4:3', style: TextStyle(fontSize: 12)),
+            SizedBox(
+              width: 80,
+              child: AspectRatio(
+                aspectRatio: 4 / 3,
+                child: Container(
+                  color: Colors.deepOrange[700],
+                  alignment: Alignment.center,
+                  child: const Text('4:3', style: TextStyle(color: Colors.white)),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  // Baseline 演示
+  Widget _buildBaselineDemo() {
+    return Container(
+      width: double.infinity,
+      height: 80,
+      decoration: BoxDecoration(
+        color: Colors.brown[100],
+        border: Border.all(color: Colors.brown, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.baseline,
+        textBaseline: TextBaseline.alphabetic,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('小字', style: TextStyle(fontSize: 12, color: Colors.brown[600])),
+          const SizedBox(width: 8),
+          Text('中字', style: TextStyle(fontSize: 20, color: Colors.brown[700])),
+          const SizedBox(width: 8),
+          Text('大字', style: TextStyle(fontSize: 32, color: Colors.brown[800], fontWeight: FontWeight.bold)),
+          const SizedBox(width: 8),
+          Text('特大', style: TextStyle(fontSize: 40, color: Colors.brown[900])),
+        ],
+      ),
+    );
+  }
+
+  // Wrap 流式布局演示
+  Widget _buildWrapDemo() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.purple[100],
+        border: Border.all(color: Colors.purple, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Wrap(
+        spacing: 8.0,  // 水平间距
+        runSpacing: 8.0,  // 垂直间距
+        alignment: WrapAlignment.center,
+        children: [
+          for (int i = 1; i <= 8; i++)
+            Chip(
+              label: Text('标签 $i'),
+              backgroundColor: Colors.purple[200 + (i * 50) % 400],
+            ),
+        ],
+      ),
+    );
+  }
+
+  // Spacer 间距填充演示
+  Widget _buildSpacerDemo() {
+    return Container(
+      width: double.infinity,
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.green[100],
+        border: Border.all(color: Colors.green, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 60, height: 40,
+            color: Colors.green[300],
+            alignment: Alignment.center,
+            child: const Text('Left'),
+          ),
+          const Spacer(flex: 1),  // 占用1份空间
+          Container(
+            width: 60, height: 40,
+            color: Colors.green[500],
+            alignment: Alignment.center,
+            child: const Text('Mid'),
+          ),
+          const Spacer(flex: 2),  // 占用2份空间
+          Container(
+            width: 60, height: 40,
+            color: Colors.green[700],
+            alignment: Alignment.center,
+            child: const Text('Right', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Offstage 隐藏演示（需要StatefulWidget，这里用静态示例）
+  Widget _buildOffstageDemo() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        border: Border.all(color: Colors.grey, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text('可见元素: '),
+              Container(
+                width: 50, height: 30,
+                color: Colors.blue,
+                alignment: Alignment.center,
+                child: const Text('显示', style: TextStyle(color: Colors.white, fontSize: 12)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const Text('隐藏元素: '),
+              const Offstage(
+                offstage: true,  // true = 隐藏
+                child: Text('这段文字被隐藏了'),
+              ),
+              Text('[Offstage隐藏中]', style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            '* Offstage隐藏元素但保持状态，与Visibility不同',
+            style: TextStyle(fontSize: 11, color: Colors.grey[600]),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // LimitedBox 限制尺寸演示
+  Widget _buildLimitedBoxDemo() {
+    return Container(
+      width: double.infinity,
+      height: 80,
+      decoration: BoxDecoration(
+        color: Colors.orange[100],
+        border: Border.all(color: Colors.orange, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('maxWidth: 80', style: TextStyle(fontSize: 11)),
+              LimitedBox(
+                maxWidth: 80,
+                maxHeight: 40,
+                child: Container(
+                  color: Colors.orange[400],
+                  alignment: Alignment.center,
+                  child: const Text('限制宽', style: TextStyle(fontSize: 12)),
+                ),
+              ),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('maxHeight: 30', style: TextStyle(fontSize: 11)),
+              LimitedBox(
+                maxWidth: 100,
+                maxHeight: 30,
+                child: Container(
+                  color: Colors.orange[600],
+                  alignment: Alignment.center,
+                  child: const Text('限制高', style: TextStyle(color: Colors.white, fontSize: 12)),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // IntrinsicWidth/Height 内在尺寸演示
+  Widget _buildIntrinsicSizeDemo() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.blue[100],
+        border: Border.all(color: Colors.blue, width: 1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('IntrinsicWidth使子元素宽度一致:', style: TextStyle(fontSize: 12)),
+          const SizedBox(height: 8),
+          IntrinsicWidth(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ElevatedButton(onPressed: () {}, child: const Text('短')),
+                const SizedBox(height: 4),
+                ElevatedButton(onPressed: () {}, child: const Text('中等长度按钮')),
+                const SizedBox(height: 4),
+                ElevatedButton(onPressed: () {}, child: const Text('很长很长的按钮文字')),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            '* 所有按钮宽度自动匹配最宽的按钮',
+            style: TextStyle(fontSize: 11, color: Colors.grey[600]),
           ),
         ],
       ),
