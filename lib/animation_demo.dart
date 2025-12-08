@@ -24,38 +24,68 @@ class AnimationDemo extends StatelessWidget {
             const SizedBox(height: 20),
 
             // 1. 隐式动画示例
-            _buildSectionTitle('1. 隐式动画（AnimatedContainer）'),
+            _buildSectionTitle('1. 隐式动画', 'Implicit Animation (AnimatedContainer)'),
             const ImplicitAnimationExample(),
             const SizedBox(height: 20),
 
             // 2. 淡入淡出动画
-            _buildSectionTitle('2. 淡入淡出动画（FadeTransition）'),
+            _buildSectionTitle('2. 淡入淡出动画', 'Fade Transition (FadeTransition)'),
             const FadeAnimationExample(),
             const SizedBox(height: 20),
 
             // 3. 缩放动画
-            _buildSectionTitle('3. 缩放动画（ScaleTransition）'),
+            _buildSectionTitle('3. 缩放动画', 'Scale Transition (ScaleTransition)'),
             const ScaleAnimationExample(),
             const SizedBox(height: 20),
 
             // 4. 旋转动画
-            _buildSectionTitle('4. 旋转动画（RotationTransition）'),
+            _buildSectionTitle('4. 旋转动画', 'Rotation Transition (RotationTransition)'),
             const RotationAnimationExample(),
             const SizedBox(height: 20),
 
             // 5. 平移动画
-            _buildSectionTitle('5. 平移动画（SlideTransition）'),
+            _buildSectionTitle('5. 平移动画', 'Slide Transition (SlideTransition)'),
             const SlideAnimationExample(),
             const SizedBox(height: 20),
 
             // 6. 组合动画
-            _buildSectionTitle('6. 组合动画'),
+            _buildSectionTitle('6. 组合动画', 'Combined Animations'),
             const CombinedAnimationExample(),
             const SizedBox(height: 20),
 
             // 7. 英雄动画
-            _buildSectionTitle('7. 英雄动画（Hero）'),
+            _buildSectionTitle('7. 英雄动画', 'Hero Animation (Hero)'),
             const HeroAnimationExample(),
+            const SizedBox(height: 20),
+
+            // 8. AnimatedBuilder
+            _buildSectionTitle('8. AnimatedBuilder', 'AnimatedBuilder Widget'),
+            const AnimatedBuilderExample(),
+            const SizedBox(height: 20),
+
+            // 9. AnimatedOpacity
+            _buildSectionTitle('9. 透明度动画', 'AnimatedOpacity Widget'),
+            const AnimatedOpacityExample(),
+            const SizedBox(height: 20),
+
+            // 10. AnimatedCrossFade
+            _buildSectionTitle('10. 交叉淡入淡出', 'AnimatedCrossFade Widget'),
+            const AnimatedCrossFadeExample(),
+            const SizedBox(height: 20),
+
+            // 11. AnimatedSwitcher
+            _buildSectionTitle('11. 切换动画', 'AnimatedSwitcher Widget'),
+            const AnimatedSwitcherExample(),
+            const SizedBox(height: 20),
+
+            // 12. TweenAnimationBuilder
+            _buildSectionTitle('12. Tween动画构建器', 'TweenAnimationBuilder Widget'),
+            const TweenAnimationBuilderExample(),
+            const SizedBox(height: 20),
+
+            // 13. AnimatedList
+            _buildSectionTitle('13. 动画列表', 'AnimatedList Widget'),
+            const AnimatedListExample(),
             const SizedBox(height: 20),
           ],
         ),
@@ -63,11 +93,21 @@ class AnimationDemo extends StatelessWidget {
     );
   }
 
-  // 构建section标题
-  Widget _buildSectionTitle(String title) {
-    return Text(
-      title,
-      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+  // 构建section标题，中英文对照
+  Widget _buildSectionTitle(String chineseTitle, [String? englishTitle]) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          chineseTitle,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        if (englishTitle != null) 
+          Text(
+            englishTitle,
+            style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+          ),
+      ],
     );
   }
 }
@@ -610,6 +650,355 @@ class HeroDetailPage extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+// 8. AnimatedBuilder示例
+class AnimatedBuilderExample extends StatefulWidget {
+  const AnimatedBuilderExample({super.key});
+
+  @override
+  State<AnimatedBuilderExample> createState() => _AnimatedBuilderExampleState();
+}
+
+class _AnimatedBuilderExampleState extends State<AnimatedBuilderExample>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..repeat(reverse: true);
+
+    _animation = Tween<double>(begin: 0, end: 2 * 3.14159).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.blue[50],
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.blue, width: 1),
+      ),
+      child: Column(
+        children: [
+          const Text('AnimatedBuilder示例'),
+          const SizedBox(height: 16),
+          AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) {
+              return Transform.rotate(
+                angle: _animation.value,
+                child: Container(
+                  width: 150,
+                  height: 150,
+                  color: Colors.blue,
+                  alignment: Alignment.center,
+                  child: const Text('AnimatedBuilder', style: TextStyle(color: Colors.white)),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 9. AnimatedOpacity示例
+class AnimatedOpacityExample extends StatefulWidget {
+  const AnimatedOpacityExample({super.key});
+
+  @override
+  State<AnimatedOpacityExample> createState() => _AnimatedOpacityExampleState();
+}
+
+class _AnimatedOpacityExampleState extends State<AnimatedOpacityExample> {
+  bool _isVisible = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.green[50],
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.green, width: 1),
+      ),
+      child: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _isVisible = !_isVisible;
+              });
+            },
+            child: Text(_isVisible ? '隐藏' : '显示'),
+          ),
+          const SizedBox(height: 16),
+          AnimatedOpacity(
+            opacity: _isVisible ? 1.0 : 0.0,
+            duration: const Duration(seconds: 1),
+            child: Container(
+              width: 150,
+              height: 150,
+              color: Colors.green,
+              alignment: Alignment.center,
+              child: const Text('AnimatedOpacity', style: TextStyle(color: Colors.white)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 10. AnimatedCrossFade示例
+class AnimatedCrossFadeExample extends StatefulWidget {
+  const AnimatedCrossFadeExample({super.key});
+
+  @override
+  State<AnimatedCrossFadeExample> createState() => _AnimatedCrossFadeExampleState();
+}
+
+class _AnimatedCrossFadeExampleState extends State<AnimatedCrossFadeExample> {
+  bool _showFirst = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.orange[50],
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.orange, width: 1),
+      ),
+      child: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _showFirst = !_showFirst;
+              });
+            },
+            child: const Text('切换组件'),
+          ),
+          const SizedBox(height: 16),
+          AnimatedCrossFade(
+            firstChild: Container(
+              width: 150,
+              height: 150,
+              color: Colors.orange,
+              alignment: Alignment.center,
+              child: const Text('组件1', style: TextStyle(color: Colors.white)),
+            ),
+            secondChild: Container(
+              width: 150,
+              height: 150,
+              color: Colors.purple,
+              alignment: Alignment.center,
+              child: const Text('组件2', style: TextStyle(color: Colors.white)),
+            ),
+            crossFadeState: _showFirst ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+            duration: const Duration(seconds: 1),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 11. AnimatedSwitcher示例
+class AnimatedSwitcherExample extends StatefulWidget {
+  const AnimatedSwitcherExample({super.key});
+
+  @override
+  State<AnimatedSwitcherExample> createState() => _AnimatedSwitcherExampleState();
+}
+
+class _AnimatedSwitcherExampleState extends State<AnimatedSwitcherExample> {
+  int _count = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.purple[50],
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.purple, width: 1),
+      ),
+      child: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _count += 1;
+              });
+            },
+            child: const Text('递增数字'),
+          ),
+          const SizedBox(height: 16),
+          AnimatedSwitcher(
+            duration: const Duration(seconds: 1),
+            transitionBuilder: (child, animation) {
+              return ScaleTransition(
+                scale: animation,
+                child: child,
+              );
+            },
+            child: Text(
+              '$_count',
+              key: ValueKey<int>(_count),
+              style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 12. TweenAnimationBuilder示例
+class TweenAnimationBuilderExample extends StatelessWidget {
+  const TweenAnimationBuilderExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.red[50],
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.red, width: 1),
+      ),
+      child: Column(
+        children: [
+          const Text('TweenAnimationBuilder示例'),
+          const SizedBox(height: 16),
+          TweenAnimationBuilder(
+            tween: Tween<double>(begin: 0, end: 200),
+            duration: const Duration(seconds: 2),
+            curve: Curves.bounceOut,
+            builder: (context, value, child) {
+              return Container(
+                width: value,
+                height: value,
+                color: Colors.red,
+                alignment: Alignment.center,
+                child: child,
+              );
+            },
+            child: const Text('Tween', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 13. AnimatedList示例
+class AnimatedListExample extends StatefulWidget {
+  const AnimatedListExample({super.key});
+
+  @override
+  State<AnimatedListExample> createState() => _AnimatedListExampleState();
+}
+
+class _AnimatedListExampleState extends State<AnimatedListExample> {
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+  final List<String> _items = ['Item 1', 'Item 2', 'Item 3'];
+  int _counter = 4;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.teal[50],
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.teal, width: 1),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  final newItem = 'Item $_counter';
+                  _counter++;
+                  final index = _items.length;
+                  _items.add(newItem);
+                  _listKey.currentState?.insertItem(index);
+                },
+                child: const Text('添加项'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_items.isNotEmpty) {
+                    final index = _items.length - 1;
+                    _listKey.currentState?.removeItem(
+                      index,
+                      (context, animation) {
+                        final removedItem = _items.removeAt(index);
+                        return FadeTransition(
+                          opacity: animation,
+                          child: ListTile(
+                            title: Text(removedItem),
+                            tileColor: Colors.teal[200],
+                          ),
+                        );
+                      },
+                    );
+                  }
+                },
+                child: const Text('删除项'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            height: 200,
+            child: AnimatedList(
+              key: _listKey,
+              initialItemCount: _items.length,
+              itemBuilder: (context, index, animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: SlideTransition(
+                    position: Tween<Offset>(
+                      begin: const Offset(-1, 0),
+                      end: Offset.zero,
+                    ).animate(animation),
+                    child: ListTile(
+                      title: Text(_items[index]),
+                      tileColor: Colors.teal[100],
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.teal,
+                        child: Text('${index + 1}'),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

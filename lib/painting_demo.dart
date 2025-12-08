@@ -326,7 +326,7 @@ class PaintingDemo extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // 背景图片
+          // 背景内容
           Container(
             width: double.infinity,
             height: double.infinity,
@@ -336,20 +336,23 @@ class PaintingDemo extends StatelessWidget {
                   style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
             ),
           ),
-          // 半透明遮罩
-          Positioned(
-            left: 50,
-            right: 50,
-            top: 50,
-            bottom: 50,
-            child: BackdropFilter(
-              filter: ui.ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-              child: Container(
-                color: const Color.fromRGBO(255, 255, 255, 0.5),
-                alignment: Alignment.center,
-                child: const Text('模糊效果',
-                    style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          // 模糊区域 - 使用ClipRRect限制模糊范围
+          Center(
+            child: Container(
+              width: 200,
+              height: 100,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: BackdropFilter(
+                  filter: ui.ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                  child: Container(
+                    color: const Color.fromRGBO(255, 255, 255, 0.5),
+                    alignment: Alignment.center,
+                    child: const Text('模糊效果',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold)),
+                  ),
+                ),
               ),
             ),
           ),

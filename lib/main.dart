@@ -24,6 +24,8 @@ import 'input_demo.dart';
 import 'interaction_demo.dart';
 // 导入绘制和效果组件示例
 import 'painting_demo.dart';
+// 导入样式组件示例
+import 'styling_demo.dart';
 
 // Flutter应用的入口函数，所有Flutter应用都从这里开始执行
 void main() {
@@ -121,6 +123,8 @@ class MainPage extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
+                // 设置宽高比，使卡片高度为50px（宽度/高度的比例）
+                childAspectRatio: 3.0,
                 // 设置为true，让GridView只占用内容所需高度
                 shrinkWrap: true,
                 // 禁止内部滚动，使用外部滚动
@@ -367,6 +371,20 @@ class MainPage extends StatelessWidget {
                       );
                     },
                   ),
+                  // 样式组件示例
+                  _buildDemoCard(
+                    context,
+                    title: '样式组件',
+                    description: '主题、媒体查询、内边距等样式相关组件',
+                    icon: Icons.format_paint,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const StylingDemo()),
+                      );
+                    },
+                  ),
                 ],
               ),
             ],
@@ -382,38 +400,41 @@ class MainPage extends StatelessWidget {
       required String description,
       required IconData icon,
       required VoidCallback onTap}) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0), // 减小内边距
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon,
-                  size: 36, // 减小图标大小
-                  color: Theme.of(context).colorScheme.primary),
-              const SizedBox(height: 8), // 减小间距
-              Text(
-                title,
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.bold), // 减小字体大小
-              ),
-              const SizedBox(height: 4), // 减小间距
-              Text(
-                description,
-                style:
-                    TextStyle(color: Colors.grey[600], fontSize: 14), // 减小字体大小
-                textAlign: TextAlign.center,
-                maxLines: 2, // 限制最大行数
-                overflow: TextOverflow.ellipsis, // 超出显示省略号
-              ),
-            ],
+    return SizedBox(
+      height: 50, // 设置固定高度为50
+      child: Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(6.0), // 调整内边距以适应新高度
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon,
+                    size: 24, // 减小图标大小以适应新高度
+                    color: Theme.of(context).colorScheme.primary),
+                const SizedBox(height: 2), // 减小间距
+                Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.bold), // 减小字体大小
+                ),
+                const SizedBox(height: 1), // 减小间距
+                Text(
+                  description,
+                  style: TextStyle(
+                      color: Colors.grey[600], fontSize: 10), // 减小字体大小
+                  textAlign: TextAlign.center,
+                  maxLines: 2, // 限制最大行数
+                  overflow: TextOverflow.ellipsis, // 超出显示省略号
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -450,7 +471,7 @@ class MainPage extends StatelessWidget {
             const SizedBox(height: 12),
             // 高度指示器
             Container(
-              height: 120, // 明确设置高度
+              height: 50, // 明确设置高度
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.red[50],
@@ -473,7 +494,7 @@ class MainPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
-                        '高度: 120px',
+                        '高度: 50px',
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.red[700],
