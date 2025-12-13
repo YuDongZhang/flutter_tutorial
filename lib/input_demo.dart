@@ -98,105 +98,140 @@ class _TextFieldExamplesState extends State<_TextFieldExamples> {
       ),
       child: Column(
         children: [
-          // 基础文本输入
-          TextField(
-            decoration: const InputDecoration(
-              labelText: '基础文本输入',
-              border: OutlineInputBorder(),
-              hintText: '请输入文本',
-            ),
-          ),
-          const SizedBox(height: 16),
-
-          // 带控制器的文本输入
-          TextFormField(
-            controller: _emailController,
-            decoration: const InputDecoration(
-              labelText: '带控制器的文本输入',
-              border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.email),
-              hintText: '请输入邮箱',
-            ),
-            keyboardType: TextInputType.emailAddress,
-            autocorrect: false,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return '请输入邮箱';
-              }
-              if (!RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$').hasMatch(value)) {
-                return '请输入有效的邮箱地址';
-              }
-              return null;
-            },
-          ),
-          const SizedBox(height: 16),
-
-          // 密码输入
-          TextField(
-            controller: _passwordController,
-            decoration: const InputDecoration(
-              labelText: '密码输入',
-              border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.lock),
-              suffixIcon: Icon(Icons.visibility),
-              hintText: '请输入密码',
-            ),
-            obscureText: true,
-            keyboardType: TextInputType.visiblePassword,
-          ),
-          const SizedBox(height: 16),
-
-          // 多行文本输入
-          TextField(
-            decoration: const InputDecoration(
-              labelText: '多行文本输入',
-              border: OutlineInputBorder(),
-              hintText: '请输入多行文本',
-            ),
-            maxLines: 3,
-            minLines: 2,
-          ),
-          const SizedBox(height: 16),
-
-          // 带表单验证的文本输入
-          Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: '表单验证',
-                    border: OutlineInputBorder(),
-                    hintText: '请输入显示名称',
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return '请输入显示名称';
-                    }
-                    if (value.length < 3) {
-                      return '显示名称至少需要3个字符';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _displayName = value!;
-                  },
+          // 基础文本输入 - TextField
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('控件: TextField - 基础文本输入框'),
+              const SizedBox(height: 4),
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: '基础文本输入',
+                  border: OutlineInputBorder(),
+                  hintText: '请输入文本',
                 ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('提交成功: $_displayName')),
-                      );
-                    }
-                  },
-                  child: const Text('提交表单'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          // 带控制器的文本输入 - TextFormField
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('控件: TextFormField - 带验证的文本输入框'),
+              const SizedBox(height: 4),
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: '带控制器的文本输入',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.email),
+                  hintText: '请输入邮箱',
                 ),
-              ],
-            ),
+                keyboardType: TextInputType.emailAddress,
+                autocorrect: false,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '请输入邮箱';
+                  }
+                  if (!RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$').hasMatch(value)) {
+                    return '请输入有效的邮箱地址';
+                  }
+                  return null;
+                },
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          // 密码输入 - TextField with obscureText
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('控件: TextField (obscureText: true) - 密码输入框'),
+              const SizedBox(height: 4),
+              TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  labelText: '密码输入',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.lock),
+                  suffixIcon: Icon(Icons.visibility),
+                  hintText: '请输入密码',
+                ),
+                obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          // 多行文本输入 - TextField with maxLines
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('控件: TextField (maxLines/minLines) - 多行文本输入框'),
+              const SizedBox(height: 4),
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: '多行文本输入',
+                  border: OutlineInputBorder(),
+                  hintText: '请输入多行文本',
+                ),
+                maxLines: 3,
+                minLines: 2,
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          // 带表单验证的文本输入 - Form + TextFormField
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('控件: Form + TextFormField - 表单验证输入'),
+              const SizedBox(height: 4),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: '表单验证',
+                        border: OutlineInputBorder(),
+                        hintText: '请输入显示名称',
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return '请输入显示名称';
+                        }
+                        if (value.length < 3) {
+                          return '显示名称至少需要3个字符';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _displayName = value!;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('提交成功: $_displayName')),
+                          );
+                        }
+                      },
+                      child: const Text('提交表单'),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -241,32 +276,40 @@ class _SelectionControlsExamplesState
       ),
       child: Column(
         children: [
-          // 下拉菜单
-          DropdownButtonFormField<String>(
-            value: _dropdownValue,
-            decoration: const InputDecoration(
-              labelText: '下拉菜单',
-              border: OutlineInputBorder(),
-            ),
-            items: _dropdownItems.map((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (String? newValue) {
-              setState(() {
-                _dropdownValue = newValue;
-              });
-            },
-          ),
-          const SizedBox(height: 16),
-
-          // 复选框
+          // 下拉菜单 - DropdownButtonFormField
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('复选框：'),
+              const Text('控件: DropdownButtonFormField - 下拉选择框'),
+              const SizedBox(height: 4),
+              DropdownButtonFormField<String>(
+                value: _dropdownValue,
+                decoration: const InputDecoration(
+                  labelText: '下拉菜单',
+                  border: OutlineInputBorder(),
+                ),
+                items: _dropdownItems.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _dropdownValue = newValue;
+                  });
+                },
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          // 复选框 - Checkbox
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('控件: Checkbox - 复选框'),
+              const SizedBox(height: 4),
               Row(
                 children: [
                   Checkbox(
@@ -278,10 +321,7 @@ class _SelectionControlsExamplesState
                     },
                   ),
                   const Text('选项1'),
-                ],
-              ),
-              Row(
-                children: [
+                  const SizedBox(width: 16),
                   Checkbox(
                     value: _isChecked2,
                     onChanged: (bool? value) {
@@ -297,26 +337,34 @@ class _SelectionControlsExamplesState
           ),
           const SizedBox(height: 16),
 
-          // 复选框列表项
-          CheckboxListTile(
-            title: const Text('复选框列表项'),
-            subtitle: const Text('这是一个带标题和副标题的复选框'),
-            value: _isChecked1,
-            onChanged: (bool? value) {
-              setState(() {
-                _isChecked1 = value!;
-              });
-            },
-            secondary: const Icon(Icons.check_box),
-          ),
-          const SizedBox(height: 16),
-
-          // 单选按钮组
+          // 复选框列表项 - CheckboxListTile
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('单选按钮组：'),
-              Column(
+              const Text('控件: CheckboxListTile - 复选框列表项'),
+              const SizedBox(height: 4),
+              CheckboxListTile(
+                title: const Text('复选框列表项'),
+                subtitle: const Text('这是一个带标题和副标题的复选框'),
+                value: _isChecked1,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _isChecked1 = value!;
+                  });
+                },
+                secondary: const Icon(Icons.check_box),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          // 单选按钮 - Radio
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('控件: Radio - 单选按钮'),
+              const SizedBox(height: 4),
+              Row(
                 children: _radioItems.map((String value) {
                   return Row(
                     children: [
@@ -330,6 +378,7 @@ class _SelectionControlsExamplesState
                         },
                       ),
                       Text(value),
+                      const SizedBox(width: 8),
                     ],
                   );
                 }).toList(),
@@ -338,33 +387,47 @@ class _SelectionControlsExamplesState
           ),
           const SizedBox(height: 16),
 
-          // 单选按钮列表项
-          RadioListTile<String>(
-            title: const Text('单选按钮列表项'),
-            subtitle: const Text('这是一个带标题和副标题的单选按钮'),
-            value: '选项D',
-            groupValue: _radioValue,
-            onChanged: (String? newValue) {
-              setState(() {
-                _radioValue = newValue;
-              });
-            },
-            secondary: const Icon(Icons.radio_button_checked),
+          // 单选按钮列表项 - RadioListTile
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('控件: RadioListTile - 单选按钮列表项'),
+              const SizedBox(height: 4),
+              RadioListTile<String>(
+                title: const Text('单选按钮列表项'),
+                subtitle: const Text('这是一个带标题和副标题的单选按钮'),
+                value: '选项D',
+                groupValue: _radioValue,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _radioValue = newValue;
+                  });
+                },
+                secondary: const Icon(Icons.radio_button_checked),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
 
-          // 开关
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // 开关 - Switch
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('开关控件：'),
-              Switch(
-                value: _isSwitched,
-                onChanged: (bool value) {
-                  setState(() {
-                    _isSwitched = value;
-                  });
-                },
+              const Text('控件: Switch - 开关控件'),
+              const SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('开关状态'),
+                  Switch(
+                    value: _isSwitched,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _isSwitched = value;
+                      });
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -389,6 +452,13 @@ class _ButtonExamples extends StatelessWidget {
       ),
       child: Column(
         children: [
+          // 按钮控件说明
+          const Text(
+            '控件: ElevatedButton, TextButton, OutlinedButton - 各种按钮类型',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
+
           // 按钮行1
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -426,6 +496,13 @@ class _ButtonExamples extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
+          // 带图标的按钮控件说明
+          const Text(
+            '控件: ElevatedButton.icon, TextButton.icon, OutlinedButton.icon - 带图标的按钮',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
+
           // 按钮行2
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -453,6 +530,13 @@ class _ButtonExamples extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
+
+          // 图标按钮控件说明
+          const Text(
+            '控件: IconButton - 图标按钮',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
 
           // 图标按钮
           Row(
@@ -482,6 +566,13 @@ class _ButtonExamples extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
+
+          // 浮动操作按钮控件说明
+          const Text(
+            '控件: FloatingActionButton - 浮动操作按钮',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
 
           // 浮动操作按钮（模拟）
           Container(
@@ -525,6 +616,13 @@ class _SliderExamplesState extends State<_SliderExamples> {
       ),
       child: Column(
         children: [
+          // 滑块控件说明
+          const Text(
+            '控件: Slider - 基础滑块控件',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
+
           // 基础滑块
           Column(
             children: [
@@ -551,6 +649,13 @@ class _SliderExamplesState extends State<_SliderExamples> {
             ],
           ),
           const SizedBox(height: 16),
+
+          // 带刻度的滑块控件说明
+          const Text(
+            '控件: Slider (带divisions和label) - 带刻度的滑块',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
 
           // 带刻度的滑块
           Column(
@@ -582,6 +687,13 @@ class _SliderExamplesState extends State<_SliderExamples> {
             ],
           ),
           const SizedBox(height: 16),
+
+          // 范围滑块控件说明
+          const Text(
+            '控件: RangeSlider - 范围滑块控件',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
 
           // 范围滑块
           Column(
@@ -662,6 +774,13 @@ class _DateTimePickerExamples extends StatelessWidget {
       ),
       child: Column(
         children: [
+          // 日期时间选择器控件说明
+          const Text(
+            '控件: showDatePicker, showTimePicker - 日期时间选择器',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
+
           // 日期选择器按钮
           ElevatedButton(
             onPressed: () => _selectDate(context),
