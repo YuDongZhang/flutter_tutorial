@@ -1,5 +1,6 @@
 // Flutter 无障碍功能示例
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 // 无障碍功能示例页面
 class AccessibilityDemo extends StatelessWidget {
@@ -7,6 +8,68 @@ class AccessibilityDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Web端显示提示信息，因为Web端不支持完整的无障碍功能
+    if (kIsWeb) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('无障碍功能示例'),
+        ),
+        body: Center(
+          child: Container(
+            padding: const EdgeInsets.all(32.0),
+            margin: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.orange[50],
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.orange, width: 2),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.info_outline,
+                  size: 48,
+                  color: Colors.orange[600],
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'Web端无障碍功能限制',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orange,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  '由于Web浏览器的限制，无障碍功能在Web端无法正常工作。',
+                  style: TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  '建议在移动端（iOS/Android）或模拟器中测试无障碍功能，以获得完整的体验。',
+                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton.icon(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: const Icon(Icons.arrow_back),
+                  label: const Text('返回主页'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    // 移动端显示正常的无障碍功能示例
     return Scaffold(
       appBar: AppBar(
         title: const Text('无障碍功能示例'),

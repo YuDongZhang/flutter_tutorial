@@ -77,46 +77,6 @@ class MainPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // 显示总体布局高度信息
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: Colors.blue[50],
-                  border: Border.all(color: Colors.blue, width: 1),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '📏 卡片布局信息',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue[800],
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '• 网格布局：2列 x ${((11 + 1) / 2).ceil()}行',
-                      style: TextStyle(color: Colors.blue[600]),
-                    ),
-                    Text(
-                      '• 卡片间距：16px',
-                      style: TextStyle(color: Colors.blue[600]),
-                    ),
-                    Text(
-                      '• 每个卡片尺寸：自适应内容，最小高度约100px',
-                      style: TextStyle(color: Colors.blue[600]),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              // 显示单个卡片高度演示
-              _buildHeightDemoCard(),
-              const SizedBox(height: 16),
               // 网格布局
               GridView.count(
                 // 网格布局，每行2列
@@ -124,7 +84,7 @@ class MainPage extends StatelessWidget {
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
                 // 设置宽高比，使卡片高度为50px（宽度/高度的比例）
-                childAspectRatio: 4.0,
+                childAspectRatio: 8.0,
                 // 设置为true，让GridView只占用内容所需高度
                 shrinkWrap: true,
                 // 禁止内部滚动，使用外部滚动

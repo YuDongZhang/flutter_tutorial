@@ -100,7 +100,12 @@ class _DraggableExampleState extends State<_DraggableExample> {
       child: Column(
         children: [
           const Text('拖拽部件示例：'),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
+          const Text(
+            '控件: Draggable + DragTarget - 拖拽交互组件',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -190,7 +195,12 @@ class _DismissibleExampleState extends State<_DismissibleExample> {
       child: Column(
         children: [
           const Text('滑动删除部件示例：'),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
+          const Text(
+            '控件: Dismissible - 滑动删除组件',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
           SizedBox(
             height: 300,
             child: ListView.builder(
@@ -303,7 +313,12 @@ class _ReorderableListViewExampleState
       child: Column(
         children: [
           const Text('可重排序列表示例：'),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
+          const Text(
+            '控件: ReorderableListView - 可重排序列表',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
           SizedBox(
             height: 200,
             child: ReorderableListView(
@@ -356,7 +371,12 @@ class _AnimatedSwitcherExampleState extends State<_AnimatedSwitcherExample> {
       child: Column(
         children: [
           const Text('动画切换部件示例：'),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
+          const Text(
+            '控件: AnimatedSwitcher - 动画切换组件',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
           // 动画切换容器
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
@@ -468,7 +488,12 @@ class _FocusNodeExampleState extends State<_FocusNodeExample> {
       child: Column(
         children: [
           const Text('焦点管理部件示例：'),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
+          const Text(
+            '控件: FocusNode + FocusScope - 焦点管理组件',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
           TextField(
             focusNode: _focusNode1,
             decoration: InputDecoration(
@@ -553,7 +578,12 @@ class _MouseRegionExampleState extends State<_MouseRegionExample> {
       child: Column(
         children: [
           const Text('鼠标区域部件示例：'),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
+          const Text(
+            '控件: MouseRegion - 鼠标交互组件',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
           MouseRegion(
             // 鼠标进入区域
             onEnter: (event) {
@@ -635,7 +665,12 @@ class _NotificationListenerExampleState
       child: Column(
         children: [
           const Text('通知监听器部件示例：'),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
+          const Text(
+            '控件: NotificationListener - 通知监听组件',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
           // 滚动位置信息
           Container(
             padding: const EdgeInsets.all(8.0),
@@ -715,7 +750,12 @@ class _AdvancedGestureDetectorExampleState
       child: Column(
         children: [
           const Text('手势检测器高级示例：'),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
+          const Text(
+            '控件: GestureDetector - 手势检测组件',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 8),
           Text(
             _gestureInfo,
             style: const TextStyle(fontWeight: FontWeight.bold),
