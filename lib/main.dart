@@ -29,6 +29,9 @@ import 'styling_demo.dart';
 // 导入新界面示例
 import 'new_interface_demo.dart';
 
+import 'package:get/get.dart';
+import 'getx_demo/getx_demo.dart';
+
 // Flutter应用的入口函数，所有Flutter应用都从这里开始执行
 void main() {
   // runApp函数将Widget树渲染到屏幕上
@@ -45,9 +48,9 @@ class MyApp extends StatelessWidget {
   // 当Widget需要渲染或更新时，Flutter会调用此方法
   @override
   Widget build(BuildContext context) {
-    // MaterialApp是Material Design风格应用的根组件
-    // 提供了主题、路由、本地化等核心功能
-    return MaterialApp(
+    // GetMaterialApp 是 GetX 的加强版 MaterialApp
+    // 提供了路由管理、Snackbar、对话框等核心功能
+    return GetMaterialApp(
       // 应用标题，显示在任务管理器中
       title: 'Flutter教程',
       // 应用主题配置
@@ -92,6 +95,17 @@ class MainPage extends StatelessWidget {
                 // 禁止内部滚动，使用外部滚动
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
+                  // GetX 全功能演示卡片
+                  _buildDemoCard(
+                    context,
+                    title: 'GetX 全家桶',
+                    description: '状态管理、路由、依赖注入一站式演示',
+                    icon: Icons.layers_clear,
+                    onTap: () {
+                      Get.to(() => const GetXDemoPage());
+                    },
+                  ),
+
                   // 计数器示例卡片
                   _buildDemoCard(
                     context,

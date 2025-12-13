@@ -37,6 +37,7 @@ dependencies:
   
   # HTTP package for making network requests
   http: ^1.2.1
+  get: ^4.7.3
 
 dev_dependencies:
   flutter_test:
