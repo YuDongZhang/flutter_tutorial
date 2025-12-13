@@ -26,6 +26,8 @@ import 'interaction_demo.dart';
 import 'painting_demo.dart';
 // 导入样式组件示例
 import 'styling_demo.dart';
+// 导入新界面示例
+import 'new_interface_demo.dart';
 
 // Flutter应用的入口函数，所有Flutter应用都从这里开始执行
 void main() {
@@ -327,6 +329,20 @@ class MainPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const StylingDemo()),
+                      );
+                    },
+                  ),
+                  // 新界面示例
+                  _buildDemoCard(
+                    context,
+                    title: '新界面',
+                    description: '跳转到新的界面示例',
+                    icon: Icons.new_releases,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const NewInterfaceDemo()),
                       );
                     },
                   ),
