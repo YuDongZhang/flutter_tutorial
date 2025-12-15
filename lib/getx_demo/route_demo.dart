@@ -52,6 +52,29 @@ class RouteDemo extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 20),
+            _buildSection(
+              title: "路由替换与清除",
+              description: "off: 替换当前页; offAll: 清除栈并跳转",
+              content: Wrap(
+                spacing: 10,
+                children: [
+                   ElevatedButton(
+                     onPressed: () {
+                       Get.off(() => const ReplacementPage());
+                     },
+                     child: const Text("替换当前页 (Get.off)"),
+                   ),
+                   ElevatedButton(
+                     onPressed: () {
+                       // 实际开发中通常跳回 Login 或 Home
+                       Get.offAll(() => const RouteDemo()); 
+                     },
+                     child: const Text("清除栈并重置 (Get.offAll)"),
+                   ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -129,3 +152,35 @@ class ArgumentPage extends StatelessWidget {
     );
   }
 }
+
+class ReplacementPage extends StatelessWidget {
+  const ReplacementPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("替换页面")),
+      backgroundColor: Colors.green.shade50,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.swap_horiz, size: 60, color: Colors.green),
+            const SizedBox(height: 20),
+            const Text(
+              "当前页面已替换\n点击返回将回不到上一页",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => Get.back(),
+              child: const Text("尝试返回 (Get.back)"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+

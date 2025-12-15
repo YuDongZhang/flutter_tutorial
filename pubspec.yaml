@@ -38,6 +38,10 @@ dependencies:
   # HTTP package for making network requests
   http: ^1.2.1
   get: ^4.7.3
+  provider: ^6.1.1
+  flutter_riverpod: ^2.4.9
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:

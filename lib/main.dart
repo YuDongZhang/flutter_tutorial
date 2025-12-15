@@ -28,6 +28,10 @@ import 'painting_demo.dart';
 import 'styling_demo.dart';
 // 导入新界面示例
 import 'new_interface_demo.dart';
+import 'custom_widget_demo/custom_widget_home.dart';
+import 'provider_demo/provider_demo.dart';
+import 'riverpod_demo/riverpod_demo.dart';
+import 'bloc_demo/bloc_demo.dart';
 
 import 'package:get/get.dart';
 import 'getx_demo/getx_demo.dart';
@@ -357,6 +361,62 @@ class MainPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const NewInterfaceDemo()),
+                      );
+                    },
+                  ),
+                  // 自定义控件示例
+                  _buildDemoCard(
+                    context,
+                    title: '自定义控件',
+                    description: '组合、绘制与水印效果',
+                    icon: Icons.widgets,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CustomWidgetHome()),
+                      );
+                    },
+                  ),
+                  // Provider 演示
+                  _buildDemoCard(
+                    context,
+                    title: 'Provider 全面演示',
+                    description: 'Consumer, Selector, Listen详解',
+                    icon: Icons.electrical_services,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProviderDemoPage()),
+                      );
+                    },
+                  ),
+                  // Riverpod 演示
+                  _buildDemoCard(
+                    context,
+                    title: 'Riverpod 全面演示',
+                    description: 'StateProvider, 异步, Notifier',
+                    icon: Icons.electric_bolt,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RiverpodDemoPage()),
+                      );
+                    },
+                  ),
+                  // BLoC 演示
+                  _buildDemoCard(
+                    context,
+                    title: 'BLoC 全面演示',
+                    description: 'Cubit, Bloc, events & states',
+                    icon: Icons.architecture,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const BlocDemoPage()),
                       );
                     },
                   ),
